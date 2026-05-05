@@ -1,4 +1,5 @@
 # 🧠 Local RAG Assistant
+![Status](https://img.shields.io/badge/Status-Under_Development-yellow?style=for-the-badge)
 
 > A fully browser-based, privacy-first Retrieval-Augmented Generation (RAG) system.
 > Upload documents, ask questions, get AI-powered answers — all running locally on your machine.
