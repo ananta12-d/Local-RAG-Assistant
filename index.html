@@ -15,19 +15,33 @@
 <div class="topbar">
   <h1>🧠 Local RAG <span>Assistant</span></h1>
   <div class="top-controls">
+    <!-- PROVIDER SELECTOR -->
+    <div class="provider-wrap">
+      <label>Provider:</label>
+      <select class="model-select" id="providerSelect" onchange="toggleProviderUI()">
+        <option value="ollama">Ollama (Local)</option>
+        <option value="gemini">Google Gemini (Cloud)</option>
+        <option value="dryrun">Dry Run (Diagnostic)</option>
+      </select>
+    </div>
+    
+    <!-- DYNAMIC MODEL SELECTOR -->
+    <select class="model-select" id="modelSelect">
+      <option value="llama3.2">llama3.2</option>
+      <option value="gemma2">gemma2</option>
+    </select>
+
+    <!-- API KEY INPUT (HIDDEN BY DEFAULT) -->
+    <div id="apiKeyWrap" style="display: none;">
+      <input type="password" id="apiKeyInput" placeholder="Enter Gemini API Key" class="api-key-input"/>
+    </div>
+
     <div class="top-k-wrap">
       <label>Top-K:</label>
       <input type="number" id="topK" value="4" min="1" max="10"/>
     </div>
-    <select class="model-select" id="modelSelect">
-      <option value="llama3">llama3</option>
-      <option value="mistral">mistral</option>
-      <option value="llama3.2">llama3.2</option>
-      <option value="gemma2">gemma2</option>
-      <option value="phi3">phi3</option>
-      <option value="deepseek-r1">deepseek-r1</option>
-    </select>
-    <div class="top-right">
+    
+    <div class="top-right" id="statusArea">
       <div class="status-dot" id="statusDot"></div>
       <span class="status-label" id="statusLabel">Checking Ollama...</span>
     </div>
@@ -52,7 +66,26 @@
         PDF · TXT · DOCX · Images
       </div>
     </div>
+    
+    <!-- PIPELINE CONFIGURATIONS -->
+    <div class="settings-panel">
+      <div class="settings-title">Retrieval Settings</div>
+      <div class="setting-item">
+        <label>
+          <input type="checkbox" id="hybridSearchToggle" checked />
+          <span>Enable Hybrid Search (RRF)</span>
+        </label>
+      </div>
+      <div class="setting-item">
+        <label>
+          <input type="checkbox" id="contextExpansionToggle" checked />
+          <span>Context Expansion (Parent-Child)</span>
+        </label>
+      </div>
+    </div>
+
     <div class="doc-list" id="docList"></div>
+    
     <div class="stats-bar">
       <div class="stat"><div class="stat-val" id="statChunks">0</div><div class="stat-lbl">Chunks</div></div>
       <div class="stat"><div class="stat-val" id="statDocs">0</div><div class="stat-lbl">Docs</div></div>
